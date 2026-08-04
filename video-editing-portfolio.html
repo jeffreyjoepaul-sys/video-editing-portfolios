@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeffrey - Professional Video Editing & Content Creation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1D9E75;
+            --secondary: #378ADD;
+            --accent: #D4537E;
+            --dark: #2C2C2A;
+            --light: #F1EFE8;
+            --white: #FFFFFF;
+            --gray-light: #D3D1C7;
+            --gray-medium: #888780;
+            --text-primary: #2C2C2A;
+            --text-secondary: #5F5E5A;
+            --border-color: #D3D1C7;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text-primary);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 12px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            overflow: hidden;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 44, 42, 0.65);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: blur(0.5px) brightness(0.85);
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #0F6E56;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(29, 158, 117, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            box-shadow: 0 8px 16px rgba(29, 158, 117, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Portfolio Section */
+        #portfolio {
+            background: var(--light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #378ADD 0%, #1D9E75 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h3 {
+            font-size: 18px;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            background: #E1F5EE;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        #services {
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: var(--light);
+        }
+
+        .skills-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 16px;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-description {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 16px;
+        }
+
+        .contact-item p {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .contact-form {
+            background: #3d3d3a;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #555;
+            border-radius: 6px;
+            background: #2C2C2A;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--white);
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #0F6E56;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a19;
+            color: #ccc;
+            text-align: center;
+            padding: 2rem;
+            font-size: 14px;
+            border-top: 1px solid #3d3d3a;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Jeffrey<span>.</span>Edits</div>
+            <ul class="nav-links">
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-container">
+            <h1>Cinematic storytelling through <span class="highlight">professional editing</span></h1>
+            <p class="hero-description">Transform raw footage into compelling visual narratives. Specializing in motion graphics, color grading, and dynamic edits that captivate audiences.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Start Your Project</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">View Portfolio</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-container">
+            <h2 class="section-title">Recent Work</h2>
+            <p class="section-subtitle">Showcasing a selection of recent projects across different genres and styles</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🎬</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Commercial</span>
+                        <h3>Tech Startup Promo</h3>
+                        <p class="portfolio-description">High-energy promotional video with dynamic transitions and 3D effects for innovative SaaS company.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🎥</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Documentary</span>
+                        <h3>Engineering Stories</h3>
+                        <p class="portfolio-description">Narrative-driven documentary showcasing innovative engineering projects and technical achievements.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">✨</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Motion Graphics</span>
+                        <h3>Brand Animation</h3>
+                        <p class="portfolio-description">Stunning motion graphics and kinetic typography for corporate brand identity video.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🎞️</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Music Video</span>
+                        <h3>Musical Storytelling</h3>
+                        <p class="portfolio-description">Creative music video production with cinematic color grading and seamless visual effects.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">📱</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Social Media</span>
+                        <h3>Viral Content Series</h3>
+                        <p class="portfolio-description">Platform-optimized short-form videos engineered for maximum engagement and shareability.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🎭</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Event Coverage</span>
+                        <h3>Conference Highlight</h3>
+                        <p class="portfolio-description">Professional event documentation with multi-camera editing and live-to-edit workflow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-container">
+            <h2 class="section-title">Services</h2>
+            <p class="section-subtitle">Comprehensive video editing and production services tailored to your needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✂️</div>
+                    <h3>Video Editing</h3>
+                    <p>Professional editing for commercials, documentaries, vlogs, and corporate videos. Fast turnaround without compromising quality.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Color Grading</h3>
+                    <p>Cinematic color correction and grading to enhance visual appeal and create consistent mood throughout your project.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Motion Graphics</h3>
+                    <p>Engaging motion graphics and animated titles that elevate your content and communicate your message effectively.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔊</div>
+                    <h3>Audio Design</h3>
+                    <p>Professional sound design, music selection, and audio mixing to create immersive auditory experiences.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎬</div>
+                    <h3>VFX & Effects</h3>
+                    <p>Visual effects, green screen compositing, and advanced transitions to bring your creative vision to life.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Social Media Content</h3>
+                    <p>Platform-optimized video creation for Instagram, TikTok, YouTube, and LinkedIn with trending formats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-container">
+            <h2 class="section-title">Skills & Tools</h2>
+            <p class="section-subtitle">Professional expertise across industry-standard software and techniques</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Editing Software</h3>
+                    <ul class="skill-list">
+                        <li>Adobe Premiere Pro</li>
+                        <li>DaVinci Resolve</li>
+                        <li>Final Cut Pro</li>
+                        <li>After Effects</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design Tools</h3>
+                    <ul class="skill-list">
+                        <li>Adobe Photoshop</li>
+                        <li>Adobe Illustrator</li>
+                        <li>Cinema 4D</li>
+                        <li>Blender</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Audio Tools</h3>
+                    <ul class="skill-list">
+                        <li>Adobe Audition</li>
+                        <li>Audacity</li>
+                        <li>Logic Pro</li>
+                        <li>Sound Design</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li>Color Grading</li>
+                        <li>Motion Graphics</li>
+                        <li>Visual Effects</li>
+                        <li>4K/8K Workflow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-container">
+            <div class="contact-content">
+                <h2 class="section-title" style="color: var(--white);">Let's Create Something Amazing</h2>
+                <p class="contact-description">Ready to transform your vision into reality? Get in touch to discuss your project and how I can help.</p>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <p><a href="mailto:jeffreyjoepaul@gmail.com">jeffreyjoepaul@gmail.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+916383257707">+91 6383257707</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Location</h3>
+                        <p>Chennai, Tamil Nadu</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project">Project Details</label>
+                        <textarea id="project" name="project" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Jeffrey Edits. All rights reserved.</p>
+        <p>Crafted with precision and creativity</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const project = document.getElementById('project').value;
+            
+            // Simulate form submission (in production, send to server)
+            console.log('Form submitted:', { name, email, project });
+            alert(`Thanks for your inquiry, ${name}! I'll get back to you soon at ${email}.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
